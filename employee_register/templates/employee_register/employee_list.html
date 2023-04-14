@@ -1,0 +1,36 @@
+{% extends 'employee_register/base/base.html' %}
+
+{% load static %}
+
+{% block site_css %}
+<link rel="stylesheet" href="{% static 'employee_register/styles/employee_list.css' %}">
+{% endblock %}
+
+{% block content %} 
+<table>
+    <thead>
+        <tr>
+            <td>Full Name</td>
+            <td>Mobile</td>
+            <td>Position</td>
+            <td><a href="{% url 'employee_insert' %}" class="btn">Add More</a></td>
+        </tr>
+    </thead>
+    <tbody class="list">
+        {% for employee in employee_list %}
+        <tr>
+            <td>{{ employee.emp_name }}</td>
+            <td>{{ employee.mobile }}</td>
+            <td>{{ employee.positions }}</td>
+            <td>
+                <a href="{% url 'employee_update' employee.id %}" class="btn">Edit</a>
+                <form action="{% url 'employee_delete' employee.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

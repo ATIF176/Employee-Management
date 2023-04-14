@@ -1,0 +1,18 @@
+{% extends 'employee_register/base/base.html' %}
+
+{% load static %}
+
+{% block site_css %}
+<link rel="stylesheet" href="{% static 'employee_register/styles/employee_form.css' %}">
+{% endblock %}
+
+{% block content %}
+<form action="" method="post" autocomplete="off">
+    {% csrf_token %}
+    {{ form }}
+    <div class="row">
+            <button class="btn">Submit</button>
+            <a href="{% url 'employee_list' %}" class="btn">Back to list</a>
+    </div>
+</form> 
+{% endblock %}
